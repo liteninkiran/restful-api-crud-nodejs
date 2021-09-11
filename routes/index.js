@@ -25,7 +25,7 @@ router.post('/api/employee/add', (req, res) => {
         res.status(200).json({
             code: 200,
             message: 'Employee added successfully',
-            addEmplyee: data,
+            addEmployee: data,
         });
     });
 });
@@ -41,6 +41,25 @@ router.get('/api/employee/:id', (req, res) => {
     });
 });
 
-module.exports = router;
+// Update record
+router.put('/api/employee/:id', (req, res) => {
+    const emp = {
+        name: req.body.name,
+        email: req.body.email,
+        salary: req.body.salary,
+    };
 
-// 613c9261a27a71a405e98d71
+    Employee.findByIdAndUpdate(req.params.id, { $set: emp }, { new: true }, (err, data) => {
+        if (!err) {
+            res.status(200).json({
+                code: 200,
+                message: 'Employee updated successfully',
+                updateEmployee: data,
+            });
+        } else {
+            console.log(err);
+        }
+    });
+});
+
+module.exports = router;
