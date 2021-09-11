@@ -30,4 +30,17 @@ router.post('/api/employee/add', (req, res) => {
     });
 });
 
+// Get single record
+router.get('/api/employee/:id', (req, res) => {
+    Employee.findById(req.params.id, (err, data) => {
+        if (!err) {
+            res.send(data);
+        } else {
+            console.log(err);
+        }
+    });
+});
+
 module.exports = router;
+
+// 613c9261a27a71a405e98d71
