@@ -2,15 +2,6 @@ const express = require('express');
 const dotenv = require('dotenv');
 
 const app = express();
-/*
-app.get('/', (req, res) => {
-    res.send('Hello World');
-});
-
-app.get('/employees', (req, res) => {
-    res.send('Employees');
-});
-*/
 
 const connectDb = require('./config/db');
 
@@ -18,6 +9,8 @@ const connectDb = require('./config/db');
 dotenv.config({ path: './config/config.env' });
 
 connectDb();
+
+app.use('/', require('./routes/index'));
 
 app.listen(3000);
 
